@@ -1,0 +1,62 @@
+<nb-layout>
+  <nb-layout-header class="header-title">
+    <nb-actions>
+      <nb-action icon="menu-outline"></nb-action>
+      <nb-action>A Point</nb-action>
+      <nb-action icon="search-outline"></nb-action>
+      <nb-action icon="person-outline"></nb-action>
+    </nb-actions>
+  </nb-layout-header>
+  <!-- <nb-sidebar>Sidebar Content</nb-sidebar> -->
+  <nb-layout-column>
+    <h3 class="header-col-title">Resigter Event Category</h3>
+
+    <nb-card accent="primary">
+      <nb-card-header
+        >Event Category
+        <nb-action class="act-openCard">
+          <nb-icon
+            *ngIf="!isCard"
+            (click)="openCard()"
+            icon="arrow-ios-downward-outline"
+          ></nb-icon>
+          <nb-icon
+            *ngIf="isCard"
+            (click)="openCard()"
+            icon="arrow-ios-upward-outline"
+          ></nb-icon>
+        </nb-action>
+        <!-- <button class="btn-back" size="medium" style="float: right;" nbButton status="success">
+          Back
+        </button> -->
+      </nb-card-header>
+      <nb-card-body *ngIf="!isCard">
+
+        <p>Name <span style="color: #ff0000">*</span></p>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          status="basic"
+          placeholder="Name"
+        />
+        <p>Description</p>
+        <textarea nbInput fullWidth placeholder="Description"></textarea>
+        <p>Active</p>
+        <nb-select fullWidth placeholder="Active">
+          <nb-option value="true">True</nb-option>
+          <nb-option value="false">False</nb-option>
+        </nb-select>
+      </nb-card-body>
+    </nb-card>
+
+    <div class="btn-act">
+      <button class="btn-clear" size="medium" nbButton status="danger">
+        Clear
+      </button>
+      <button class="btn-save" size="medium" nbButton status="success">
+        Save
+      </button>
+    </div>
+  </nb-layout-column>
+</nb-layout>

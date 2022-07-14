@@ -1,0 +1,24 @@
+.header-title{
+  font-weight: 800;
+  font-size: 20px;
+  font-family: "Lato", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #fff;
+
+}
+.header-col-title{
+  text-align: center
+}
+.act-openCard{
+  float: right;
+  :hover{
+    cursor: pointer;
+  }
+}
+.btn-clear{
+  margin-right:10px ;
+}
+.btn-act{
+  float: right;
+}
