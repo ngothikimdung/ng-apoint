@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ResigterEventComponent } from './resigter-event/resigter-event.component';
+import { EventCategoryComponent } from './components/event-category/event-category.component';
+import { ResigterEventCategoryComponent } from './components/resigter-event-category/resigter-event-category.component';
+
 
 const routes: Routes = [
 
     {
-      path: 'resigter-event',
-      component: ResigterEventComponent
+      path: 'resigter-eventcategory/:id',
+      component: ResigterEventCategoryComponent
+    },
+    {
+      path: 'edit-eventcategory/:id',
+      component: ResigterEventCategoryComponent
+    },
+    {
+      path: 'event-category',
+      component: EventCategoryComponent
     },
 
 

@@ -6,18 +6,24 @@ import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbIcon
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ResigterEventComponent } from './resigter-event/resigter-event.component';
+
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResigterEventCategoryComponent } from './components/resigter-event-category/resigter-event-category.component';
+import { EventCategoryComponent } from './components/event-category/event-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ResigterEventComponent
+    ResigterEventCategoryComponent,
+    EventCategoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NbThemeModule.forRoot(),
     RouterModule,
     NbLayoutModule,
