@@ -10,6 +10,10 @@
 .header-col-title{
   text-align: center
 }
+.card-header:hover{
+  cursor: pointer;
+}
+
 .act-openCard{
   float: right;
   :hover{

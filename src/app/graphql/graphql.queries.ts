@@ -3,7 +3,7 @@ import { gql } from 'apollo-angular';
 const CREATE_EVENT_CATEGORY = gql`
   mutation ($NAME: String!, $DESCRIPTION: String!, $ACTIVE_FLAG: Boolean!) {
     createEventCategory(
-      createEventCategoryInput: {
+      dataInput: {
         name: $NAME
         description: $DESCRIPTION
         active_flag: $ACTIVE_FLAG
@@ -98,5 +98,5 @@ export {
   Get_getAllEventCategory,
   Get_getEventCategoryByName,
   Get_getEventCategoryById,
-  Get_getEventCategory
+  Get_getEventCategory,
 };

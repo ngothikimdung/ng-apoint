@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
 import { Apollo } from 'apollo-angular';
 import {
   Get_getAllEventCategory,
   Get_getEventCategoryById,
   Get_getEventCategoryByName,
 } from 'src/app/graphql/graphql.queries';
+import { DialogDelComponent } from '../dialog-del/dialog-del.component';
 
 @Component({
   selector: 'app-event-category',
@@ -27,7 +29,8 @@ export class EventCategoryComponent implements OnInit {
     private apollo: Apollo,
     private router: Router,
     private route: ActivatedRoute,
-    private formb: FormBuilder
+    private formb: FormBuilder,
+    private dialogService: NbDialogService
   ) {}
 
   openCard() {
@@ -38,6 +41,7 @@ export class EventCategoryComponent implements OnInit {
     this.apollo
       .watchQuery({
         query: Get_getAllEventCategory,
+        fetchPolicy: 'network-only'
       })
       .valueChanges.subscribe((res: any) => {
         this.event_category = res?.data?.getAllEventCategory;
@@ -61,9 +65,26 @@ export class EventCategoryComponent implements OnInit {
         },
       })
       .valueChanges.subscribe((res: any) => {
-        console.log('Search By ID: ', id);
+        console.log('Edit By ID: ', id);
       });
     this.router.navigate(['edit-eventcategory', id]);
+  }
+
+  removeEventCategory(id: string) {
+    this.apollo
+      .watchQuery({
+        query: Get_getEventCategoryById,
+        variables: {
+          ID: id,
+        },
+      })
+      .valueChanges.subscribe((res: any) => {
+        console.log('Remove By ID: ', id);
+      });
+    this.openDialog();
+  }
+  openDialog() {
+    this.dialogService.open(DialogDelComponent);
   }
 
   searchEventCategoryByName() {
@@ -79,8 +100,4 @@ export class EventCategoryComponent implements OnInit {
         console.log('Search By Name: ', this.event_category);
       });
   }
-
-
-
-
 }

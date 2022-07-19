@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
   CREATE_EVENT_CATEGORY,
+  Get_getAllEventCategory,
   Get_getEventCategory,
   Get_getEventCategoryById,
+  UPDATE_EVENT_CATEGORY,
 } from 'src/app/graphql/graphql.queries';
 
 @Component({
@@ -14,14 +16,14 @@ import {
   styleUrls: ['./resigter-event-category.component.scss'],
 })
 export class ResigterEventCategoryComponent implements OnInit {
-  registerevent: any[] = [];
+  event_category: any[] = [];
 
   public id: any;
 
   eventForm = this.formb.group({
     name: ['', Validators.required],
     description: [''],
-    active_flag: [null],
+    active_flag: [],
   });
 
   constructor(
@@ -48,13 +50,34 @@ export class ResigterEventCategoryComponent implements OnInit {
         },
       })
       .subscribe((res: any) => {
-        let event = Object.assign([], this.registerevent);
+        let event = Object.assign([], this.event_category);
         event.unshift(res['Register']);
-        this.registerevent = event;
-        console.log('Register Event', this.registerevent);
+        this.event_category = event;
+        console.log('Register Event', res);
       });
     this.router.navigate(['event-category']);
   }
+
+  updateEventCategory() {
+    this.apollo
+      .mutate({
+        mutation: UPDATE_EVENT_CATEGORY,
+        variables: {
+          ID: this.id,
+          NAME: this.eventForm.controls['name'].value,
+          DESCRIPTION: this.eventForm.controls['description'].value,
+          ACTIVE_FLAG: this.eventForm.controls['active_flag'].value,
+        },
+      })
+      .subscribe((res: any) => {
+        let event = Object.assign([], this.event_category);
+        event.unshift(res['Update']);
+        this.event_category = event;
+        console.log('Update', res);
+      });
+    this.router.navigate(['event-category']);
+  }
+
   clearEventCategoryForm() {
     this.eventForm.reset();
   }
@@ -68,8 +91,8 @@ export class ResigterEventCategoryComponent implements OnInit {
         },
       })
       .valueChanges.subscribe((res: any) => {
-        this.registerevent = res?.data?.Get_getEventCategory;
-        const event = res.data.getEventCategoryById
+        // this.registerevent = res?.data?.Get_getEventCategory;
+        const event = res.data.getEventCategoryById;
         for (const controlName in this.eventForm.controls) {
           if (controlName) {
             this.eventForm.controls['name'].setValue(event.name);
@@ -78,7 +101,6 @@ export class ResigterEventCategoryComponent implements OnInit {
           }
         }
       });
-
   }
 
   ngOnInit(): void {
@@ -87,6 +109,7 @@ export class ResigterEventCategoryComponent implements OnInit {
     if (this.id != '') {
       this.getEventCategory(this.id);
     }
-    console.log(this.eventForm.controls)
+    console.log(this.eventForm.controls);
+
   }
 }

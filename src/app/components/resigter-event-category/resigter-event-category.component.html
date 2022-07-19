@@ -9,11 +9,26 @@
   </nb-layout-header>
   <!-- <nb-sidebar>Sidebar Content</nb-sidebar> -->
   <nb-layout-column>
-    <!-- <h3  class="header-col-title">Update Event Category</h3> -->
-    <h3  class="header-col-title">Resigter Event Category</h3>
+    <h3  *ngIf="id != '' " class="header-col-title">Update Event Category</h3>
+    <h3 *ngIf="id === '' "  class="header-col-title">Resigter Event Category</h3>
 
     <nb-card accent="primary" [formGroup]="eventForm">
-      <nb-card-header
+      <nb-card-header class="card-header" *ngIf="!isCard" (click)="openCard()"
+        >Event Category
+        <nb-action class="act-openCard">
+          <nb-icon
+            *ngIf="!isCard"
+            (click)="openCard()"
+            icon="arrow-ios-downward-outline"
+          ></nb-icon>
+          <nb-icon
+            *ngIf="isCard"
+            (click)="openCard()"
+            icon="arrow-ios-upward-outline"
+          ></nb-icon>
+        </nb-action>
+      </nb-card-header>
+      <nb-card-header class="card-header" *ngIf="isCard" (click)="openCard()"
         >Event Category
         <nb-action class="act-openCard">
           <nb-icon
@@ -47,8 +62,8 @@
         ></textarea>
         <p>Active</p>
         <nb-select formControlName="active_flag" fullWidth placeholder="Active">
-          <nb-option [value]="true">True</nb-option>
-          <nb-option [value]="false">False</nb-option>
+          <nb-option [value]="true">Active</nb-option>
+          <nb-option [value]="false">No Active</nb-option>
         </nb-select>
       </nb-card-body>
     </nb-card>
@@ -64,6 +79,7 @@
         Clear
       </button>
       <button
+        *ngIf="id === '' "
         (click)="createEventCategory()"
         class="btn-save"
         size="medium"
@@ -71,6 +87,16 @@
         status="success"
       >
         Save
+      </button>
+      <button
+        *ngIf="id != '' "
+        (click)="updateEventCategory()"
+        class="btn-save"
+        size="medium"
+        nbButton
+        status="success"
+      >
+        Update
       </button>
     </div>
   </nb-layout-column>

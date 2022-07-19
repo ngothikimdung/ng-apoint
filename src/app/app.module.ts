@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSelectModule, NbSidebarModule, NbThemeModule, NbToggleModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDialogModule, NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSelectModule, NbSidebarModule, NbThemeModule, NbToggleModule } from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,12 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResigterEventCategoryComponent } from './components/resigter-event-category/resigter-event-category.component';
 import { EventCategoryComponent } from './components/event-category/event-category.component';
+import { DialogDelComponent } from './components/dialog-del/dialog-del.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResigterEventCategoryComponent,
-    EventCategoryComponent
+    EventCategoryComponent,
+    DialogDelComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { EventCategoryComponent } from './components/event-category/event-catego
     NbEvaIconsModule,
     NbIconModule,
     NbSidebarModule.forRoot(),
+    NbDialogModule.forRoot(),
     NbMenuModule,
     NbActionsModule,
     GraphQLModule,

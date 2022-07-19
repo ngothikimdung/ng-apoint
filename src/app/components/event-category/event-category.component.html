@@ -23,7 +23,8 @@
     </h3>
 
     <nb-card accent="primary" [formGroup]="eventForm">
-      <nb-card-header
+
+        <nb-card-header class="card-header" *ngIf="!isCard" (click)="openCard()"
         >Event Category
         <nb-action class="act-openCard">
           <nb-icon
@@ -38,6 +39,22 @@
           ></nb-icon>
         </nb-action>
       </nb-card-header>
+      <nb-card-header class="card-header" *ngIf="isCard" (click)="openCard()"
+        >Event Category
+        <nb-action class="act-openCard">
+          <nb-icon
+            *ngIf="!isCard"
+            (click)="openCard()"
+            icon="arrow-ios-downward-outline"
+          ></nb-icon>
+          <nb-icon
+            *ngIf="isCard"
+            (click)="openCard()"
+            icon="arrow-ios-upward-outline"
+          ></nb-icon>
+        </nb-action>
+      </nb-card-header>
+
       <nb-card-body *ngIf="!isCard">
         <p>Name <span style="color: #ff0000">*</span></p>
         <input
@@ -62,7 +79,13 @@
         </nb-select>
 
         <div class="btn-act">
-          <button (click)="clearEventCategoryForm()" class="btn-clear" size="medium" nbButton status="danger">
+          <button
+            (click)="clearEventCategoryForm()"
+            class="btn-clear"
+            size="medium"
+            nbButton
+            status="danger"
+          >
             Clear
           </button>
           <button class="btn-search" size="medium" nbButton status="success">
@@ -120,9 +143,13 @@
 
             <th>
               <form class="search-by" [formGroup]="eventForm">
-                <nb-select formControlName="active_flag" fullWidth placeholder="Active">
-                  <nb-option [value]="true">True</nb-option>
-                  <nb-option [value]="false">False</nb-option>
+                <nb-select
+                  formControlName="active_flag"
+                  fullWidth
+                  placeholder="Active"
+                >
+                  <nb-option [value]="true">Active</nb-option>
+                  <nb-option [value]="false">No Active</nb-option>
                 </nb-select>
               </form>
             </th>
@@ -144,7 +171,7 @@
                   >
                   </nb-icon>
                 </nb-action>
-                <nb-action class="act-icon">
+                <nb-action (click)="removeEventCategory(event._id)"  class="act-icon">
                   <nb-icon
                     class="act-icon-trash"
                     style="cursor: pointer"
