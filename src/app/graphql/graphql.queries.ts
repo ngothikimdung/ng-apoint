@@ -61,6 +61,23 @@ const Get_getAllEventCategory = gql`
   }
 `;
 
+const Get_searchEventCategory = gql`
+query(
+  $NAME: String!,
+  $ACTIVE_FLAG: Boolean
+  )
+{
+  searchEventCategory(
+    filter:{
+      name:$NAME,
+      active:$ACTIVE_FLAG
+      }){
+    name
+    active_flag
+  }
+}
+`
+
 const Get_getEventCategoryByName = gql`
   query ($NAME: String!) {
     getEventCategoryByName(name: $NAME) {
@@ -99,4 +116,5 @@ export {
   Get_getEventCategoryByName,
   Get_getEventCategoryById,
   Get_getEventCategory,
+  Get_searchEventCategory
 };

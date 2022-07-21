@@ -7,6 +7,7 @@ import {
   Get_getAllEventCategory,
   Get_getEventCategoryById,
   Get_getEventCategoryByName,
+  Get_searchEventCategory,
 } from 'src/app/graphql/graphql.queries';
 import { DialogDelComponent } from '../dialog-del/dialog-del.component';
 
@@ -81,7 +82,7 @@ export class EventCategoryComponent implements OnInit {
         },
       })
       .valueChanges.subscribe((res: any) => {
-        console.log('Remove By ID: ', id);
+        // console.log('Remove By ID: ', id);
       });
     this.openDialog();
   }
@@ -91,6 +92,21 @@ export class EventCategoryComponent implements OnInit {
         event_id: this.event_id,
       },
     });
+  }
+
+  searchEventCategory() {
+    this.apollo
+      .watchQuery({
+        query: Get_searchEventCategory,
+        variables: {
+          NAME: this.eventForm.controls["name"].value,
+          ACTIVE_FLAG: this.eventForm.controls["active_flag"].value,
+        },
+      })
+      .valueChanges.subscribe((res: any) => {
+        this.event_category = res?.data?.searchEventCategory;
+
+      });
   }
 
   searchEventCategoryByName() {

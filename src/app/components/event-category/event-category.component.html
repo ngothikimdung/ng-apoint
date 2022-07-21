@@ -23,8 +23,7 @@
     </h3>
 
     <nb-card accent="primary" [formGroup]="eventForm">
-
-        <nb-card-header class="card-header" *ngIf="!iscard" (click)="openCard()"
+      <nb-card-header class="card-header" *ngIf="!iscard" (click)="openCard()"
         >Filter Event Category
         <nb-action class="act-openCard">
           <nb-icon
@@ -55,8 +54,9 @@
         </nb-action>
       </nb-card-header>
 
-      <nb-card-body *ngIf="!iscard">
-        <p>Name <span style="color: #ff0000">*</span></p>
+      <nb-card-body *ngIf="!iscard" >
+        <div class="card-search">
+          <p>Name <span style="color: #ff0000">*</span></p>
         <input
           formControlName="name"
           type="text"
@@ -65,18 +65,19 @@
           status="basic"
           placeholder="Name"
         />
-        <p>Description</p>
+        <!-- <p>Description</p>
         <textarea
           formControlName="description"
           nbInput
           fullWidth
           placeholder="Description"
-        ></textarea>
+        ></textarea> -->
         <p>Active</p>
         <nb-select formControlName="active_flag" fullWidth placeholder="Active">
           <nb-option [value]="true">Active</nb-option>
           <nb-option [value]="false">No Active</nb-option>
         </nb-select>
+        </div>
 
         <div class="btn-act">
           <button
@@ -88,7 +89,13 @@
           >
             Clear
           </button>
-          <button class="btn-search" size="medium" nbButton status="success">
+          <button
+            class="btn-search"
+            size="medium"
+            nbButton
+            status="success"
+            (click)="searchEventCategory()"
+          >
             Search
           </button>
         </div>
@@ -142,7 +149,7 @@
             </th>
 
             <th>
-              <form class="search-by" [formGroup]="eventForm">
+              <form class="search-by" (mouseenter)="searchEventCategory()" [formGroup]="eventForm">
                 <nb-select
                   formControlName="active_flag"
                   fullWidth
@@ -171,7 +178,10 @@
                   >
                   </nb-icon>
                 </nb-action>
-                <nb-action (click)="removeEventCategory(event._id)"  class="act-icon">
+                <nb-action
+                  (click)="removeEventCategory(event._id)"
+                  class="act-icon"
+                >
                   <nb-icon
                     class="act-icon-trash"
                     style="cursor: pointer"
