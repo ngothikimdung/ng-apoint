@@ -13,37 +13,37 @@
     <h3 *ngIf="id === '' "  class="header-col-title">Resigter Event Category</h3>
 
     <nb-card accent="primary" [formGroup]="eventForm">
-      <nb-card-header class="card-header" *ngIf="!isCard" (click)="openCard()"
+      <nb-card-header class="card-header" *ngIf="!iscard" (click)="openCard()"
         >Event Category
         <nb-action class="act-openCard">
           <nb-icon
-            *ngIf="!isCard"
+            *ngIf="!iscard"
             (click)="openCard()"
             icon="arrow-ios-downward-outline"
           ></nb-icon>
           <nb-icon
-            *ngIf="isCard"
+            *ngIf="iscard"
             (click)="openCard()"
             icon="arrow-ios-upward-outline"
           ></nb-icon>
         </nb-action>
       </nb-card-header>
-      <nb-card-header class="card-header" *ngIf="isCard" (click)="openCard()"
+      <nb-card-header class="card-header" *ngIf="iscard" (click)="openCard()"
         >Event Category
         <nb-action class="act-openCard">
           <nb-icon
-            *ngIf="!isCard"
+            *ngIf="!iscard"
             (click)="openCard()"
             icon="arrow-ios-downward-outline"
           ></nb-icon>
           <nb-icon
-            *ngIf="isCard"
+            *ngIf="iscard"
             (click)="openCard()"
             icon="arrow-ios-upward-outline"
           ></nb-icon>
         </nb-action>
       </nb-card-header>
-      <nb-card-body *ngIf="!isCard">
+      <nb-card-body *ngIf="!iscard">
         <p>Name <span style="color: #ff0000">*</span></p>
         <input
           formControlName="name"
@@ -53,6 +53,7 @@
           status="basic"
           placeholder="Name"
         />
+
         <p>Description</p>
         <textarea
           formControlName="description"
@@ -79,8 +80,10 @@
         Clear
       </button>
       <button
-        *ngIf="id === '' "
+
+        *ngIf="id === ''"
         (click)="createEventCategory()"
+        (click)="showToast(physicalPositions.BOTTOM_RIGHT, 'warning')"
         class="btn-save"
         size="medium"
         nbButton

@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { Apollo } from 'apollo-angular';
 import {
@@ -16,9 +16,9 @@ import { DialogDelComponent } from '../dialog-del/dialog-del.component';
   styleUrls: ['./event-category.component.scss'],
 })
 export class EventCategoryComponent implements OnInit {
-  isCard: boolean = false;
+  iscard: boolean = false;
   event_category: any[] = [];
-
+  event_id = '';
   eventForm = this.formb.group({
     name: ['', Validators.required],
     description: [''],
@@ -28,26 +28,27 @@ export class EventCategoryComponent implements OnInit {
   constructor(
     private apollo: Apollo,
     private router: Router,
-    private route: ActivatedRoute,
+
     private formb: FormBuilder,
     private dialogService: NbDialogService
   ) {}
 
   openCard() {
-    this.isCard = !this.isCard;
+    this.iscard = !this.iscard;
   }
 
   ngOnInit(): void {
     this.apollo
       .watchQuery({
         query: Get_getAllEventCategory,
-        fetchPolicy: 'network-only'
+        fetchPolicy: 'network-only',
       })
       .valueChanges.subscribe((res: any) => {
         this.event_category = res?.data?.getAllEventCategory;
         console.log('Data Event Category', res);
       });
   }
+
   clearEventCategoryForm() {
     this.eventForm.reset();
   }
@@ -71,6 +72,7 @@ export class EventCategoryComponent implements OnInit {
   }
 
   removeEventCategory(id: string) {
+    this.event_id = id;
     this.apollo
       .watchQuery({
         query: Get_getEventCategoryById,
@@ -84,7 +86,11 @@ export class EventCategoryComponent implements OnInit {
     this.openDialog();
   }
   openDialog() {
-    this.dialogService.open(DialogDelComponent);
+    this.dialogService.open(DialogDelComponent, {
+      context: {
+        event_id: this.event_id,
+      },
+    });
   }
 
   searchEventCategoryByName() {

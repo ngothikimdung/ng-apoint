@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  NbComponentStatus,
+  NbGlobalLogicalPosition,
+  NbGlobalPhysicalPosition,
+  NbGlobalPosition,
+  NbToastrService,
+} from '@nebular/theme';
 import { Apollo } from 'apollo-angular';
 import {
   CREATE_EVENT_CATEGORY,
@@ -18,6 +25,9 @@ import {
 export class ResigterEventCategoryComponent implements OnInit {
   event_category: any[] = [];
 
+  physicalPositions = NbGlobalPhysicalPosition;
+  logicalPositions = NbGlobalLogicalPosition;
+
   public id: any;
 
   eventForm = this.formb.group({
@@ -30,32 +40,41 @@ export class ResigterEventCategoryComponent implements OnInit {
     private formb: FormBuilder,
     private apollo: Apollo,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastrService: NbToastrService
   ) {}
-  isCard: boolean = false;
-  isUpdate: boolean = false;
+  iscard: boolean = false;
 
   openCard() {
-    this.isCard = !this.isCard;
+    this.iscard = !this.iscard;
   }
 
   createEventCategory() {
-    this.apollo
-      .mutate({
-        mutation: CREATE_EVENT_CATEGORY,
-        variables: {
-          NAME: this.eventForm.controls['name'].value,
-          DESCRIPTION: this.eventForm.controls['description'].value,
-          ACTIVE_FLAG: this.eventForm.controls['active_flag'].value,
-        },
-      })
-      .subscribe((res: any) => {
-        let event = Object.assign([], this.event_category);
-        event.unshift(res['Register']);
-        this.event_category = event;
-        console.log('Register Event', res);
-      });
-    this.router.navigate(['event-category']);
+    if (!this.eventForm.invalid) {
+      this.apollo
+        .mutate({
+          mutation: CREATE_EVENT_CATEGORY,
+          variables: {
+            NAME: this.eventForm.controls['name'].value,
+            DESCRIPTION: this.eventForm.controls['description'].value,
+            ACTIVE_FLAG: this.eventForm.controls['active_flag'].value,
+          },
+        })
+        .subscribe((res: any) => {
+          let event = Object.assign([], this.event_category);
+          event.unshift(res['Register']);
+          this.event_category = event;
+          console.log('Register Event', res);
+        });
+      this.router.navigate(['event-category']);
+    }
+  }
+
+  showToast(position: NbGlobalPosition, status: NbComponentStatus) {
+    this.toastrService.show('', 'Please input name Event', {
+      position,
+      status,
+    });
   }
 
   updateEventCategory() {
@@ -91,7 +110,6 @@ export class ResigterEventCategoryComponent implements OnInit {
         },
       })
       .valueChanges.subscribe((res: any) => {
-        // this.registerevent = res?.data?.Get_getEventCategory;
         const event = res.data.getEventCategoryById;
         for (const controlName in this.eventForm.controls) {
           if (controlName) {
@@ -105,11 +123,9 @@ export class ResigterEventCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log('ID Here', this.id);
     if (this.id != '') {
       this.getEventCategory(this.id);
     }
     console.log(this.eventForm.controls);
-
   }
 }

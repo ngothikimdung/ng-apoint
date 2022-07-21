@@ -24,38 +24,38 @@
 
     <nb-card accent="primary" [formGroup]="eventForm">
 
-        <nb-card-header class="card-header" *ngIf="!isCard" (click)="openCard()"
-        >Event Category
+        <nb-card-header class="card-header" *ngIf="!iscard" (click)="openCard()"
+        >Filter Event Category
         <nb-action class="act-openCard">
           <nb-icon
-            *ngIf="!isCard"
+            *ngIf="!iscard"
             (click)="openCard()"
             icon="arrow-ios-downward-outline"
           ></nb-icon>
           <nb-icon
-            *ngIf="isCard"
+            *ngIf="iscard"
             (click)="openCard()"
             icon="arrow-ios-upward-outline"
           ></nb-icon>
         </nb-action>
       </nb-card-header>
-      <nb-card-header class="card-header" *ngIf="isCard" (click)="openCard()"
+      <nb-card-header class="card-header" *ngIf="iscard" (click)="openCard()"
         >Event Category
         <nb-action class="act-openCard">
           <nb-icon
-            *ngIf="!isCard"
+            *ngIf="!iscard"
             (click)="openCard()"
             icon="arrow-ios-downward-outline"
           ></nb-icon>
           <nb-icon
-            *ngIf="isCard"
+            *ngIf="iscard"
             (click)="openCard()"
             icon="arrow-ios-upward-outline"
           ></nb-icon>
         </nb-action>
       </nb-card-header>
 
-      <nb-card-body *ngIf="!isCard">
+      <nb-card-body *ngIf="!iscard">
         <p>Name <span style="color: #ff0000">*</span></p>
         <input
           formControlName="name"
@@ -74,8 +74,8 @@
         ></textarea>
         <p>Active</p>
         <nb-select formControlName="active_flag" fullWidth placeholder="Active">
-          <nb-option [value]="true">True</nb-option>
-          <nb-option [value]="false">False</nb-option>
+          <nb-option [value]="true">Active</nb-option>
+          <nb-option [value]="false">No Active</nb-option>
         </nb-select>
 
         <div class="btn-act">
@@ -185,7 +185,7 @@
             </td>
             <td>{{ event.name }}</td>
             <td>{{ event.description }}</td>
-            <td>{{ event.active_flag }}</td>
+            <td>{{ event.active_flag ? "Active" : "No Active" }}</td>
           </tr>
         </table>
         <br />
