@@ -78,7 +78,7 @@ export class EventCategoryComponent implements OnInit {
       .watchQuery({
         query: Get_getEventCategoryById,
         variables: {
-          ID: id,
+          ID: this.event_id,
         },
       })
       .valueChanges.subscribe((res: any) => {
@@ -107,6 +107,7 @@ export class EventCategoryComponent implements OnInit {
         this.event_category = res?.data?.searchEventCategory;
 
       });
+      this.eventForm.reset();
   }
 
   searchEventCategoryByName() {

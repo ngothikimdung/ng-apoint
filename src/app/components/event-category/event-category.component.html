@@ -149,12 +149,13 @@
             </th>
 
             <th>
-              <form class="search-by" (mouseenter)="searchEventCategory()" [formGroup]="eventForm">
+              <form class="search-by"  [formGroup]="eventForm">
                 <nb-select
                   formControlName="active_flag"
                   fullWidth
                   placeholder="Active"
                 >
+                  <!-- <nb-option style="color: #ccc;" [value]="">--</nb-option> -->
                   <nb-option [value]="true">Active</nb-option>
                   <nb-option [value]="false">No Active</nb-option>
                 </nb-select>
