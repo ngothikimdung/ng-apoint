@@ -1,28 +1,47 @@
-.header-title{
+.header-title {
   font-weight: 800;
   font-size: 20px;
   font-family: "Lato", sans-serif;
   text-transform: uppercase;
   margin-bottom: 20px;
   color: #fff;
-
 }
-.header-col-title{
-  text-align: center
+.header-col-title {
+  text-align: center;
 }
-.card-header:hover{
+.card-header:hover {
   cursor: pointer;
 }
 
-.act-openCard{
+.act-openCard {
   float: right;
-  :hover{
+  :hover {
     cursor: pointer;
   }
 }
-.btn-clear{
-  margin-right:10px ;
+.btn-clear {
+  margin-right: 10px;
 }
-.btn-act{
+.btn-act {
   float: right;
+}
+
+p {
+  display: block;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+nb-card-body {
+  display: block;
+
+  .card-body {
+    display: flex;
+    margin-top: 15px 15px;
+  }
+
+  .card-resig {
+    width: 100%;
+    margin-right: 20px;
+  }
 }

@@ -44,29 +44,38 @@
         </nb-action>
       </nb-card-header>
       <nb-card-body *ngIf="!iscard">
-        <p>Name <span style="color: #ff0000">*</span></p>
-        <input
-          autofocus
-          formControlName="name"
-          type="text"
-          nbInput
-          fullWidth
-          status="basic"
-          placeholder="Name"
-        />
+        <div class="card-body">
+          <div class="card-resig">
+            <p>Name <span style="color: #ff0000">*</span></p>
+            <input
+              autofocus
+              formControlName="name"
+              type="text"
+              nbInput
+              fullWidth
+              status="basic"
+              placeholder="Name"
+            />
+          </div>
 
-        <p>Description</p>
-        <textarea
-          formControlName="description"
-          nbInput
-          fullWidth
-          placeholder="Description"
-        ></textarea>
+          <div class="card-resig">
+            <p>Description</p>
+            <textarea
+              formControlName="description"
+              nbInput
+              fullWidth
+              placeholder="Description"
+            ></textarea>
+          </div>
+        </div>
+
         <p>Active</p>
-        <nb-select formControlName="active_flag" fullWidth placeholder="Active">
-          <nb-option [value]="true">Active</nb-option>
-          <nb-option [value]="false">No Active</nb-option>
-        </nb-select>
+        <nb-checkbox
+          formControlName="active_flag"
+          (checkedChange)="toggle($event)"
+          status="info"
+          >Active</nb-checkbox
+        >
       </nb-card-body>
     </nb-card>
 

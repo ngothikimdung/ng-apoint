@@ -10,16 +10,16 @@
   text-align: center;
 }
 
-.card-header:hover{
+.card-header:hover {
   cursor: pointer;
 }
 
-.btn-new{
+.btn-new {
   float: right;
 }
 .act-openCard {
   float: right;
-  :hover{
+  :hover {
     cursor: pointer;
   }
 }
@@ -62,12 +62,29 @@
   width: 100%;
 }
 
-.act-icon{
-
-  margin:0 5px ;
+.act-icon {
+  margin: 0 5px;
 }
-.act-btn{
+.act-btn {
   display: flex;
 }
 
+p {
+  display: block;
+  font-weight: 600;
+  font-size: 17px;
+}
 
+nb-card-body {
+  display: block;
+
+  .card-search {
+    display: flex;
+    margin-top: 15px 15px;
+  }
+
+  .card-serach-body {
+    width: 50%;
+    margin-right: 20px;
+  }
+}

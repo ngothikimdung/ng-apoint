@@ -29,11 +29,15 @@ export class ResigterEventCategoryComponent implements OnInit {
   logicalPositions = NbGlobalLogicalPosition;
 
   public id: any;
+  active_flag = false;
 
+  toggle(active_flag: boolean) {
+    this.active_flag = active_flag;
+  }
   eventForm = this.formb.group({
     name: ['', Validators.required],
     description: [''],
-    active_flag: [],
+    active_flag: [false],
   });
 
   constructor(

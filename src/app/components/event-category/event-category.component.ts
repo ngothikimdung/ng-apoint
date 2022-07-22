@@ -20,10 +20,16 @@ export class EventCategoryComponent implements OnInit {
   iscard: boolean = false;
   event_category: any[] = [];
   event_id = '';
+
+  active_flag = false;
+
+  toggle(active_flag: boolean) {
+    this.active_flag = active_flag;
+  }
   eventForm = this.formb.group({
     name: ['', Validators.required],
     description: [''],
-    active_flag: [null],
+    active_flag: [false],
   });
 
   constructor(
@@ -52,6 +58,8 @@ export class EventCategoryComponent implements OnInit {
 
   clearEventCategoryForm() {
     this.eventForm.reset();
+    this.eventForm.get('name')?.reset('');
+    this.eventForm.get('active_flag')?.reset(false);
   }
 
   resigterEventCategory() {
@@ -98,16 +106,16 @@ export class EventCategoryComponent implements OnInit {
     this.apollo
       .watchQuery({
         query: Get_searchEventCategory,
+        fetchPolicy: 'network-only',
         variables: {
-          NAME: this.eventForm.controls["name"].value,
-          ACTIVE_FLAG: this.eventForm.controls["active_flag"].value,
+          NAME: this.eventForm.controls['name'].value,
+          ACTIVE_FLAG: this.eventForm.controls['active_flag'].value,
         },
       })
       .valueChanges.subscribe((res: any) => {
         this.event_category = res?.data?.searchEventCategory;
-
       });
-      this.eventForm.reset();
+    this.clearEventCategoryForm();
   }
 
   searchEventCategoryByName() {

@@ -54,29 +54,28 @@
         </nb-action>
       </nb-card-header>
 
-      <nb-card-body *ngIf="!iscard" >
+      <nb-card-body *ngIf="!iscard">
         <div class="card-search">
-          <p>Name <span style="color: #ff0000">*</span></p>
-        <input
-          formControlName="name"
-          type="text"
-          nbInput
-          fullWidth
-          status="basic"
-          placeholder="Name"
-        />
-        <!-- <p>Description</p>
-        <textarea
-          formControlName="description"
-          nbInput
-          fullWidth
-          placeholder="Description"
-        ></textarea> -->
-        <p>Active</p>
-        <nb-select formControlName="active_flag" fullWidth placeholder="Active">
-          <nb-option [value]="true">Active</nb-option>
-          <nb-option [value]="false">No Active</nb-option>
-        </nb-select>
+          <div class="card-serach-body">
+            <p>Name <span style="color: #ff0000">*</span></p>
+            <input
+              formControlName="name"
+              type="text"
+              nbInput
+              fullWidth
+              status="basic"
+              placeholder="Name"
+            />
+          </div>
+          <div class="card-search-body">
+            <p>Active</p>
+            <nb-checkbox
+              formControlName="active_flag"
+              (checkedChange)="toggle($event)"
+              status="info"
+              >Active</nb-checkbox
+            >
+          </div>
         </div>
 
         <div class="btn-act">
@@ -150,15 +149,21 @@
 
             <th>
               <form class="search-by"  [formGroup]="eventForm">
-                <nb-select
+                <nb-checkbox
+                  formControlName="active_flag"
+                  (checkedChange)="toggle($event)"
+                  status="info"
+                  >Active</nb-checkbox
+                >
+                <!-- <nb-select
                   formControlName="active_flag"
                   fullWidth
                   placeholder="Active"
                 >
-                  <!-- <nb-option style="color: #ccc;" [value]="">--</nb-option> -->
+                  <nb-option style="color: #ccc;" [value]="">--</nb-option>
                   <nb-option [value]="true">Active</nb-option>
                   <nb-option [value]="false">No Active</nb-option>
-                </nb-select>
+                </nb-select> -->
               </form>
             </th>
           </tr>
@@ -196,7 +201,9 @@
             </td>
             <td>{{ event.name }}</td>
             <td>{{ event.description }}</td>
-            <td>{{ event.active_flag ? "Active" : "No Active" }}</td>
+            <td>
+              {{ event.active_flag ? "Active" : "No Active" }}
+            </td>
           </tr>
         </table>
         <br />

@@ -14,6 +14,8 @@ import { ResigterEventCategoryComponent } from './components/resigter-event-cate
 import { EventCategoryComponent } from './components/event-category/event-category.component';
 import { DialogDelComponent } from './components/dialog-del/dialog-del.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +44,7 @@ import { DialogDelComponent } from './components/dialog-del/dialog-del.component
     NbToastrModule.forRoot(),
     NbMenuModule,
     NbActionsModule,
+    NbCheckboxModule,
     GraphQLModule,
     HttpClientModule,
     BrowserAnimationsModule
